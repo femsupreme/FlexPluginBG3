@@ -94,3 +94,27 @@ plugin.on('plugin.data', (payload) => {
 
 // Connect to flexdesigner and start the plugin
 plugin.start()
+
+// ---------------------------------------------------------------------------
+// Baldur's Gate 3 connection test
+// ---------------------------------------------------------------------------
+const net = require('node:net')
+
+/**
+ * Attempt to connect to the BG3 Lua debugger. The Script Extender exposes a TCP
+ * socket (default 9998) when the EnableLuaDebugger option is enabled.
+ */
+function connectToBG3(host = '127.0.0.1', port = 9998) {
+  logger.info(`Attempting BG3 connection to ${host}:${port}`)
+  const client = new net.Socket()
+  client.connect(port, host, () => {
+    logger.info('Connected to Baldur\'s Gate 3')
+    client.end()
+  })
+  client.on('error', (err) => {
+    logger.error('Failed to connect to BG3:', err.message)
+  })
+}
+
+// Kick off connection attempt
+connectToBG3()
