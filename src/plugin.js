@@ -128,6 +128,10 @@ function watchBG3Logs(logPath = BG3_LOG_PATH) {
         }
         return
       }
+      if (stats.size < lastSize) {
+        logger.info('Log file truncated or rotated. Resetting lastSize to 0.')
+        lastSize = 0
+      }
       if (stats.size > lastSize) {
         const stream = fs.createReadStream(logPath, {
           start: lastSize,
