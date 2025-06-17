@@ -4,6 +4,15 @@ FlexPluginBG3 allows Baldur's Gate 3 information to be shown on your FlexBar dev
 current test build targets **macOS** and does not include any Windows specific
 dependencies.
 
+## Easy Install (macOS)
+
+1. Install Node 20 or newer from [nodejs.org](https://nodejs.org).
+2. Download or clone this repository.
+3. Open Terminal and run `./install.sh` inside the project folder.
+
+The installer will build and install the plugin. Launch FlexBar when it finishes.
+
+
 ## Connection
 
 This plugin monitors the Baldur's Gate 3 `Player.log` file to detect game
