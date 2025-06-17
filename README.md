@@ -1,6 +1,8 @@
 # FlexPluginBG3
 
-FlexPluginBG3 allows Baldur's Gate 3 information to be shown on your FlexBar device.
+FlexPluginBG3 allows Baldur's Gate 3 information to be shown on your FlexBar device. The
+current test build targets **macOS** and does not include any Windows specific
+dependencies.
 
 ## Connection
 
