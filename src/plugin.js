@@ -131,7 +131,7 @@ function watchBG3Logs(logPath = BG3_LOG_PATH) {
       if (stats.size > lastSize) {
         const stream = fs.createReadStream(logPath, {
           start: lastSize,
-          end: stats.size
+          end: stats.size - 1
         })
         stream.on('data', (chunk) => {
           const lines = chunk.toString().split(/\r?\n/).filter(Boolean)
