@@ -11,3 +11,30 @@ extender opens a TCP port (default `9998`). The plugin attempts to connect to
 
 Ensure you have the Script Extender installed and the `EnableLuaDebugger` option
 set to `true` in `ScriptExtenderSettings.json` before launching the game.
+
+## Testing on macOS
+
+1. Install Node 20 and the Flex CLI:
+
+   ```bash
+   npm install -g @eniac/flexcli
+   ```
+
+2. Install dependencies and build the plugin:
+
+   ```bash
+   npm install
+   npm run build
+   ```
+
+3. Validate, link, and debug the plugin:
+
+   ```bash
+   npm run plugin:validate
+   npm run plugin:link
+   npm run plugin:debug
+   ```
+
+4. Launch Baldur's Gate 3 with the Script Extender and `EnableLuaDebugger` enabled.
+
+5. Confirm that the plugin connects by checking the console logs.
