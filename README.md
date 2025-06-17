@@ -1,6 +1,8 @@
 # FlexPluginBG3
 
-FlexPluginBG3 allows Baldur's Gate 3 information to be shown on your FlexBar device.
+FlexPluginBG3 allows Baldur's Gate 3 information to be shown on your FlexBar device. The
+current test build targets **macOS** and does not include any Windows specific
+dependencies.
 
 ## Connection
 
@@ -11,6 +13,11 @@ extender opens a TCP port (default `9998`). The plugin attempts to connect to
 
 Ensure you have the Script Extender installed and the `EnableLuaDebugger` option
 set to `true` in `ScriptExtenderSettings.json` before launching the game.
+
+## Testing
+
+This project requires **Node.js 20** or newer. Make sure Node 20 is installed
+before running any npm scripts or tests.
 
 ## Testing on macOS
 

@@ -12,6 +12,9 @@
     "plugin:install": "flexcli plugin install --path ./com.lucas_godfrey.flexpluginbg.flexplugin --force"
   },
   "type": "commonjs",
+  "engines": {
+    "node": "^20"
+  },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^28.0.0",
     "@rollup/plugin-node-resolve": "^15.2.2",
