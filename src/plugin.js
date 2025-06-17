@@ -96,29 +96,64 @@ plugin.on('plugin.data', (payload) => {
 plugin.start()
 
 // ---------------------------------------------------------------------------
-// Baldur's Gate 3 connection test
+// Baldur's Gate 3 log file monitor (macOS compatible)
 // ---------------------------------------------------------------------------
-const net = require('node:net')
+const fs = require('node:fs')
+const os = require('node:os')
+const path = require('node:path')
 
-// Default connection settings for Baldur's Gate 3 Lua debugger
-const DEFAULT_BG3_HOST = '127.0.0.1'
-const DEFAULT_BG3_PORT = 9998
+// Default macOS log path for Baldur's Gate 3
+const BG3_LOG_PATH = path.join(
+  os.homedir(),
+  'Library',
+  'Application Support',
+  'Larian Studios',
+  "Baldur's Gate 3",
+  'Player.log'
+)
 
 /**
- * Attempt to connect to the BG3 Lua debugger. The Script Extender exposes a TCP
- * socket (default 9998) when the EnableLuaDebugger option is enabled.
+ * Monitor the Player.log file for new entries. This does not require the
+ * Script Extender and works with the standard macOS version of BG3.
  */
-function connectToBG3(host = DEFAULT_BG3_HOST, port = DEFAULT_BG3_PORT) {
-  logger.info(`Attempting BG3 connection to ${host}:${port}`)
-  const client = new net.Socket()
-  client.connect(port, host, () => {
-    logger.info('Connected to Baldur\'s Gate 3')
-    client.end()
-  })
-  client.on('error', (err) => {
-    logger.error('Failed to connect to BG3:', err.message)
-  })
+function watchBG3Logs(logPath = BG3_LOG_PATH) {
+  logger.info(`Watching BG3 log: ${logPath}`)
+  let lastSize = 0
+
+  const readNewLines = () => {
+    fs.stat(logPath, (err, stats) => {
+      if (err) {
+        if (err.code !== 'ENOENT') {
+          logger.error('Error reading log file:', err.message)
+        }
+        return
+      }
+      if (stats.size < lastSize) {
+        logger.info('Log file truncated or rotated. Resetting lastSize to 0.')
+        lastSize = 0
+      }
+      if (stats.size > lastSize) {
+        const stream = fs.createReadStream(logPath, {
+          start: lastSize,
+          end: stats.size - 1
+        })
+        stream.on('data', (chunk) => {
+          const lines = chunk.toString().split(/\r?\n/).filter(Boolean)
+          for (const line of lines) {
+            logger.info(`[BG3] ${line}`)
+          }
+        })
+        stream.on('end', () => {
+          lastSize = stats.size
+        })
+      }
+    })
+  }
+
+  fs.watchFile(logPath, { interval: 1000 }, readNewLines)
+  // Initial read if file already exists
+  readNewLines()
 }
 
-// Kick off connection attempt
-connectToBG3()
+// Start watching the log file
+watchBG3Logs()

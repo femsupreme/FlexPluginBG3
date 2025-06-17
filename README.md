@@ -6,13 +6,14 @@ dependencies.
 
 ## Connection
 
-This plugin tests connectivity with the Baldur's Gate 3 Script Extender. When
-the game is started with the script extender and Lua debugger enabled, the
-extender opens a TCP port (default `9998`). The plugin attempts to connect to
-`127.0.0.1:9998` on startup and logs the result.
+This plugin monitors the Baldur's Gate 3 `Player.log` file to detect game
+activity. No Script Extender is required. On macOS the log is located at:
 
-Ensure you have the Script Extender installed and the `EnableLuaDebugger` option
-set to `true` in `ScriptExtenderSettings.json` before launching the game.
+```
+~/Library/Application Support/Larian Studios/Baldur's Gate 3/Player.log
+```
+
+When the log file is updated, new lines are printed to the plugin console.
 
 ## Testing
 
@@ -42,6 +43,6 @@ before running any npm scripts or tests.
    npm run plugin:debug
    ```
 
-4. Launch Baldur's Gate 3 with the Script Extender and `EnableLuaDebugger` enabled.
+4. Launch Baldur's Gate 3.
 
-5. Confirm that the plugin connects by checking the console logs.
+5. Confirm that the plugin reports log lines in the console.
