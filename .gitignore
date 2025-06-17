@@ -4,3 +4,4 @@ logs
 .env
 package-lock.json
 com.lucas_godfrey.flexpluginbg.plugin/backend
+.DS_Store
