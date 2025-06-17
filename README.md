@@ -18,3 +18,30 @@ set to `true` in `ScriptExtenderSettings.json` before launching the game.
 
 This project requires **Node.js 20** or newer. Make sure Node 20 is installed
 before running any npm scripts or tests.
+
+## Testing on macOS
+
+1. Install Node 20 and the Flex CLI:
+
+   ```bash
+   npm install -g @eniac/flexcli
+   ```
+
+2. Install dependencies and build the plugin:
+
+   ```bash
+   npm install
+   npm run build
+   ```
+
+3. Validate, link, and debug the plugin:
+
+   ```bash
+   npm run plugin:validate
+   npm run plugin:link
+   npm run plugin:debug
+   ```
+
+4. Launch Baldur's Gate 3 with the Script Extender and `EnableLuaDebugger` enabled.
+
+5. Confirm that the plugin connects by checking the console logs.
