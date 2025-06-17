@@ -16,10 +16,6 @@
         {
             "platform": "mac",
             "minimumVersion": "10.15"
-        },
-        {
-            "platform": "windows",
-            "minimumVersion": "10"
         }
     ],
     "device": [
@@ -43,7 +39,6 @@
                   "keyType": "default",
                   "clickable": true,
                   "platform": [
-                      "windows",
                       "mac"
                   ]
               },
