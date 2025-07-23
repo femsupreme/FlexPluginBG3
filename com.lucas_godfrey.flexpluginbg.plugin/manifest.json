@@ -30,40 +30,11 @@
         "style": {
             "icon": "mdi mdi-puzzle"
         },
-        "children": [
-          {
-              "title": "$Counter.Title",
-              "tip": "$Counter.Tip",
-              "cid": "com.lucas_godfrey.flexpluginbg.counter",
-              "config": {
-                  "keyType": "default",
-                  "clickable": true,
-                  "platform": [
-                      "mac"
-                  ]
-              },
-              "style": {
-                  "icon": "mdi mdi-gesture-tap-button",
-                  "width": 240
-              },
-              "data": {
-                  "rangeMin": "0",
-                  "rangeMax": "100"
-              }
-          }
-        ]
+        "children": []
     },
     "local": {
         "en": {
-            "PluginName": "FlexPluginBG3",
-            "Counter": {
-                "Title": "Tap Counter",
-                "Tip": "Default keys with customizable drawable content",
-                "UI": {
-                    "RangeMin": "Minimum Value",
-                    "RangeMax": "Maximum Value"
-                }
-            }
+            "PluginName": "FlexPluginBG3"
         }
     }
 }

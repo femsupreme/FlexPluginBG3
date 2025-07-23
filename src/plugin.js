@@ -1,7 +1,4 @@
-const { plugin, logger, pluginPath, resourcesPath } = require("@eniac/flexdesigner")
-
-// Store key data
-const keyData = {}
+const { plugin, logger } = require("@eniac/flexdesigner")
 
 /**
  * Called when current active window changes
@@ -53,43 +50,13 @@ plugin.on('device.status', (devices) => {
  *  keys: []
  * }
  */
+// Listen for plugin lifecycle events
 plugin.on('plugin.alive', (payload) => {
     logger.info('Plugin alive:', payload)
-    for (let key of payload.keys) {
-      keyData[key.uid] = key
-      if (key.cid === 'com.lucas_godfrey.flexpluginbg.counter') {
-          keyData[key.uid].counter = parseInt(key.data.rangeMin)
-          key.style.showIcon = false
-          key.style.showTitle = true
-          key.title = 'Click Me!'
-          plugin.draw(payload.serialNumber, key, 'draw')
-      }
-    }
 })
 
-
-/**
- * Called when user interacts with a key
- * @param {object} payload key data 
- * {
- *  serialNumber, 
- *  data
- * }
- */
 plugin.on('plugin.data', (payload) => {
     logger.info('Received plugin.data:', payload)
-    const data = payload.data
-    if (data.key.cid === "com.lucas_godfrey.flexpluginbg.counter") {
-      const key = data.key
-      key.style.showIcon = false
-      key.style.showTitle = true
-      keyData[key.uid].counter++
-      if (keyData[key.uid].counter > parseInt(key.data.rangeMax)) {
-          keyData[key.uid].counter = parseInt(key.data.rangeMin)
-      }
-      key.title = keyData[key.uid].counter.toString()
-      plugin.draw(payload.serialNumber, key, 'draw')
-    }
 })
 
 // Connect to flexdesigner and start the plugin
